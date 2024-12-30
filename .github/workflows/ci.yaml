@@ -23,15 +23,15 @@ jobs:
         run: npm ci
 
       # Run npm ci in the src directory
-      - name: Install dependencies in src directory
-        working-directory: ./src
+      - name: Install dependencies in cdk-deployment directory
+        working-directory: ./cdk-deployment
         run: npm ci
 
       - name: Build CDK Stack
         run: npm run build
 
       - name: Diff AWS CDK Stack
-        run: "npx cdk diff CdkPipelineEbDemoStack --ci --require-approval never --no-asset-metadata"
+        run: "npx cdk diff CdkPipelineEbDemoStack-cdk-is-subfolder --ci --require-approval never --no-asset-metadata"
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
