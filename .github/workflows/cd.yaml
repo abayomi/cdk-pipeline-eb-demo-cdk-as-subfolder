@@ -30,9 +30,11 @@ jobs:
         run: npm ci
 
       - name: Build CDK Stack
+        working-directory: ./cdk-deployment
         run: npm run build
 
       - name: Deploy AWS CDK Stack
+        working-directory: ./cdk-deployment
         run: "npx cdk deploy CdkPipelineEbDemoStack-cdk-is-subfolder --ci --require-approval never --no-asset-metadata"
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
